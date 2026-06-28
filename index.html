@@ -1873,3 +1873,312 @@ function calcDiff(){
 </script>
 </body>
 </html>
+@media (max-width: 900px) {
+/* ─────────────────────────────────────────────
+   JARVIS OS VISUAL UPGRADE PATCH
+   Mission-control polish, animations, depth
+───────────────────────────────────────────── */
+
+/* Animated tactical background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(rgba(201,168,76,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.025) 1px, transparent 1px),
+    radial-gradient(circle at 20% 10%, rgba(158,45,85,0.12), transparent 28%),
+    radial-gradient(circle at 80% 90%, rgba(201,168,76,0.07), transparent 30%);
+  background-size: 36px 36px, 36px 36px, auto, auto;
+  animation: tacticalGrid 24s linear infinite;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .08;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(255,255,255,.08) 0px,
+    rgba(255,255,255,.08) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+@keyframes tacticalGrid {
+  from { background-position: 0 0, 0 0, center, center; }
+  to { background-position: 36px 36px, 36px 36px, center, center; }
+}
+
+#login-screen,
+#app {
+  position: relative;
+  z-index: 1;
+}
+
+/* Console topbar glow */
+.topbar {
+  box-shadow: 0 8px 30px rgba(0,0,0,.35);
+}
+
+.topbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--burg-bright), transparent);
+  opacity: .65;
+}
+
+.system-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--green-bright);
+  border: 1px solid rgba(46,204,113,.35);
+  background: rgba(46,204,113,.08);
+  padding: 5px 10px;
+  border-radius: 999px;
+}
+
+.system-pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--green-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--green-bright);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Sidebar command console */
+.sidebar {
+  background:
+    linear-gradient(180deg, rgba(158,45,85,.08), transparent 22%),
+    var(--surface);
+}
+
+.sidebar::before {
+  content: "JS";
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: var(--gold);
+  width: calc(100% - 32px);
+  margin: 0 16px 22px;
+  padding: 12px 0;
+  text-align: center;
+  border: 1px solid var(--border2);
+  background: linear-gradient(135deg, rgba(201,168,76,.08), rgba(158,45,85,.10));
+  box-shadow: inset 0 0 22px rgba(201,168,76,.04);
+}
+
+.nav-item {
+  margin: 2px 8px;
+  border-radius: 4px;
+}
+
+.nav-item.active {
+  background: linear-gradient(90deg, rgba(158,45,85,.30), rgba(158,45,85,.08));
+  box-shadow: inset 0 0 24px rgba(158,45,85,.08), 0 0 18px rgba(158,45,85,.10);
+}
+
+.nav-item.active::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 10px var(--gold);
+}
+
+.nav-item:hover .nav-icon {
+  transform: translateX(2px) scale(1.08);
+}
+
+.nav-icon {
+  transition: transform .18s ease;
+}
+
+/* Module animation */
+.module.active {
+  animation: moduleIn .28s ease both;
+}
+
+@keyframes moduleIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mod-header {
+  position: relative;
+  overflow: hidden;
+}
+
+.mod-header::before {
+  content: "";
+  position: absolute;
+  inset: -80px -120px auto auto;
+  width: 360px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(158,45,85,.18), transparent 68%);
+  pointer-events: none;
+}
+
+/* Premium cards */
+.card,
+.dash-master,
+.dash-btn,
+.track-card {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.035), transparent 32%),
+    linear-gradient(180deg, rgba(158,45,85,.045), transparent 60%),
+    var(--surface);
+  box-shadow:
+    0 14px 35px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.035);
+  backdrop-filter: blur(6px);
+}
+
+.card:hover,
+.dash-btn:hover,
+.track-card:hover {
+  border-color: rgba(201,168,76,.45);
+}
+
+/* Tactical corner brackets */
+.dash-btn::before,
+.card::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 16px;
+  height: 16px;
+  border-top: 1px solid rgba(201,168,76,.35);
+  border-right: 1px solid rgba(201,168,76,.35);
+  opacity: .7;
+  pointer-events: none;
+}
+
+.card,
+.dash-btn {
+  position: relative;
+}
+
+/* Better operation cards */
+.dash-btn-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(201,168,76,.08);
+  border: 1px solid rgba(201,168,76,.18);
+  box-shadow: inset 0 0 18px rgba(201,168,76,.04);
+}
+
+.dash-btn-name {
+  font-size: 17px;
+}
+
+.dash-btn-sub {
+  color: var(--gray2);
+}
+
+/* Operations log table */
+.tbl tr {
+  transition: background .16s ease, transform .16s ease;
+}
+
+.tbl tr:hover td {
+  background: rgba(201,168,76,.035);
+}
+
+.tbl th {
+  background: rgba(0,0,0,.12);
+}
+
+/* Buttons */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent, rgba(255,255,255,.12), transparent);
+  transform: translateX(-120%);
+  transition: transform .45s ease;
+}
+
+.btn:hover::after {
+  transform: translateX(120%);
+}
+
+/* Evidence / journal polish */
+.journal-entry {
+  background:
+    linear-gradient(145deg, rgba(201,168,76,.05), transparent 40%),
+    var(--surface);
+  box-shadow: 0 10px 26px rgba(0,0,0,.20);
+}
+
+.journal-entry::before {
+  content: "CASE NOTE";
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: .2em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+/* Login logo polish */
+.login-title {
+  filter: drop-shadow(0 0 22px rgba(201,168,76,.12));
+}
+
+.login-box {
+  background: rgba(42,42,46,.55);
+  border: 1px solid rgba(201,168,76,.14);
+  padding: 18px;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+
+/* Coming soon placeholder upgrade */
+#mod-symbrook .alert,
+#mod-music .alert,
+#mod-military .alert {
+  min-height: 160px;
+  align-items: center;
+  font-size: 13px;
+  border-style: dashed;
+  background:
+    linear-gradient(135deg, rgba(201,168,76,.08), rgba(158,45,85,.08)),
+    var(--surface);
+}
